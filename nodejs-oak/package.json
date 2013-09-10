@@ -2,7 +2,7 @@
   "name": "nodejs-oak",
   "version": "0.1.0",
   "description": "nodejs-oak",
-  "main": "hello-world-server.js",
+  "main": "aok-server.js",
   "scripts": {
     "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
   },
@@ -12,7 +12,7 @@
     "Eclipse",
     "Nodeclipse"
   ],
-  "author": "",
-  "license": "BSD",
+  "author": "Andrei Filimonov",
+  "license": "GPL 2.0",
   "readmeFilename": "README.md"
 }
