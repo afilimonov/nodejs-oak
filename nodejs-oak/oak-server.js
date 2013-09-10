@@ -1,12 +1,12 @@
 var http = require('http'),
-    servlet = require('./oak/binding/http');
+    mk = require('./oak/mk');
 
 var options = {
 	host : 'localhost',
 	port : 1337
 };
 
-http.createServer(servlet.listener).listen(
+http.createServer(mk.getListener()).listen(
 		1337,
 		'localhost',
 		function() {

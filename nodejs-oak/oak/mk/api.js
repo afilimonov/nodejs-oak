@@ -48,8 +48,10 @@
 * </ul>
 */
 
+var core = require('./core');
+
 exports.MicroKernel = MicroKernel = function () {
-	
+	var repo = new core.Repository('.');
 }; 
 
 //---------------------------------------------------------< REVISION ops >
@@ -61,7 +63,7 @@ exports.MicroKernel = MicroKernel = function () {
 * @return the id of the head revision
 * @throws MicroKernelException if an error occurs
 */
-MicroKenel.prototype.getHeadRevision = function() {};
+MicroKernel.prototype.getHeadRevision = function() {};
 
 /**
 * Creates a new checkpoint of the latest head revision. The checkpoint
@@ -564,6 +566,6 @@ MicroKernel.prototype.read = function(blobId, pos, buff, off, length) {};
 */
 MicroKernel.prototype.write = function(inputStream){};
 
-exports.MicroKernelException = function (message) {
+exports.MicroKernelException = MicroKernelException = function (message) {
 	this.message = message;
 };

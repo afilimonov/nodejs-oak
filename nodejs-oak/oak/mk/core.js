@@ -1,37 +1,8 @@
 /**
- * Oak Microkernel core objects
+ * Oak MicroKernel core implementation objects
  */
 
-/**
- * MicroKernel API
- */
-
-exports.MicroKernel = function MicroKernel(home) {
-	var homeDir = home;
-	var repository = new Repository(home);
-};
-
-MicroKernel.prototype.dispose = function () {
-	repository.shutDown();
-};
-
-MicroKernel.prototype.getHeadRevisionId() {
-	repository.getHeadRevision();
-};
-
-MicroKernel.prototype.getBaseRevisionId() {
-	
-};
-
-MicroKernel.prototye.getRevisionHistory() {
-	
-}
-
-/**
- * Repository object
- */
-
-exports.Repository = function Repository (home) {
+exports.Repository = Repository = function(home) {
 	var homeDir = home;
 	var initialized = false;
 	var rs = new RevisionStore();
