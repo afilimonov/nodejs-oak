@@ -61,9 +61,7 @@ exports.MicroKernel = MicroKernel = function () {
 * @return the id of the head revision
 * @throws MicroKernelException if an error occurs
 */
-MicroKenel.prototype.getHeadRevision = function() {
-	
-};
+MicroKenel.prototype.getHeadRevision = function() {};
 
 /**
 * Creates a new checkpoint of the latest head revision. The checkpoint
@@ -75,7 +73,7 @@ MicroKenel.prototype.getHeadRevision = function() {
 * @return revision id of the created checkpoint
 * @throws MicroKernelException if the checkpoint could not be created
 */
-String checkpoint(long lifetime) throws MicroKernelException;
+MicroKernel.prototype.checkpoint = function(lifetime) {};
 
 /**
 * Returns a list of all currently available (historical) head revisions in
@@ -112,8 +110,7 @@ String checkpoint(long lifetime) throws MicroKernelException;
 * @return a list of revisions in chronological order in JSON format.
 * @throws MicroKernelException if an error occurs
 */
-String /* jsonArray */ getRevisionHistory(long since, int maxEntries, String path)
-        throws MicroKernelException;
+MicroKernel.prototype.getRevisionHistory = function(since, maxEntries, path) {};
 
 /**
 * Waits for a commit to occur that is more recent than {@code oldHeadRevisionId}.
@@ -135,8 +132,7 @@ String /* jsonArray */ getRevisionHistory(long since, int maxEntries, String pat
 * @throws MicroKernelException if an error occurs
 * @throws InterruptedException if the thread was interrupted
 */
-String waitForCommit(String oldHeadRevisionId, long timeout)
-        throws MicroKernelException, InterruptedException;
+MicroKernel.prototype.waitForCommit = function(oldHeadRevisionId, timeout) {};
 
 /**
 * Returns a revision journal, starting with {@code fromRevisionId}
@@ -182,9 +178,7 @@ String waitForCommit(String oldHeadRevisionId, long timeout)
 * @return a chronological list of revisions in JSON format
 * @throws MicroKernelException if any of the specified revisions doesn't exist or if another error occurs
 */
-String /* jsonArray */ getJournal(String fromRevisionId, String toRevisionId,
-                                  String path)
-        throws MicroKernelException;
+MicroKernel.prototype.getJournal = function(fromRevisionId, toRevisionId, path) {};
 
 /**
 * Returns the JSON diff representation of the changes between the specified
@@ -228,9 +222,7 @@ String /* jsonArray */ getJournal(String fromRevisionId, String toRevisionId,
 * @return JSON diff representation of the changes
 * @throws MicroKernelException if any of the specified revisions doesn't exist or if another error occurs
 */
-String /* JSON diff */ diff(String fromRevisionId, String toRevisionId,
-                            String path, int depth)
-        throws MicroKernelException;
+MicroKernel.prototype.diff = function(fromRevisionId, toRevisionId, path, depth) {};
 
 //-------------------------------------------------------------< READ ops >
 
@@ -242,7 +234,7 @@ String /* JSON diff */ diff(String fromRevisionId, String toRevisionId,
 * @return {@code true} if the specified node exists, otherwise {@code false}
 * @throws MicroKernelException if the specified revision does not exist or if another error occurs
 */
-boolean nodeExists(String path, String revisionId) throws MicroKernelException;
+MicroKernel.prototype.nodeExists = function(path, revisionId) {};
 
 /**
 * Returns the number of child nodes of the specified node.
@@ -256,7 +248,7 @@ boolean nodeExists(String path, String revisionId) throws MicroKernelException;
 * @return the number of child nodes
 * @throws MicroKernelException if the specified node or revision does not exist or if another error occurs
 */
-long getChildNodeCount(String path, String revisionId) throws MicroKernelException;
+MicroKernel.prototype.getChildNodeCount = function(path, revisionId) {};
 
 /**
 * Returns the node tree rooted at the specified parent node with the
@@ -409,9 +401,7 @@ long getChildNodeCount(String path, String revisionId) throws MicroKernelExcepti
 * @throws MicroKernelException if the specified revision does not exist or if another error occurs
 * @throws IllegalArgumentException if both an {@code offset > 0} and a {@code filter} on node names have been specified
 */
-String /* jsonTree */ getNodes(String path, String revisionId, int depth,
-                               long offset, int maxChildNodes, String filter)
-        throws MicroKernelException;
+MicroKernel.prototype.getNodes = function(path, revisionId, depth, offset, maxChildNodes, filter) {};
 
 //------------------------------------------------------------< WRITE ops >
 
@@ -434,9 +424,7 @@ String /* jsonTree */ getNodes(String path, String revisionId, int depth,
 * @return id of newly created revision
 * @throws MicroKernelException if the specified revision doesn't exist or if another error occurs
 */
-String /* revisionId */ commit(String path, String jsonDiff,
-                               String revisionId, String message)
-        throws MicroKernelException;
+MicroKernel.prototype.commit = function(path, jsonDiff, revisionId, message){};
 
 /**
 * Creates a <i>private</i> branch revision off the specified <i>public</i>
@@ -455,8 +443,7 @@ String /* revisionId */ commit(String path, String jsonDiff,
 * or if another error occurs
 * @see #merge(String, String)
 */
-String /* revisionId */ branch(String trunkRevisionId)
-        throws MicroKernelException;
+MicroKernel.prototype.branch = function(trunkRevisionId){};
 
 /**
 * Merges the specified <i>private</i> branch revision with the current
@@ -475,8 +462,7 @@ String /* revisionId */ branch(String trunkRevisionId)
 * another error occurs.
 * @see #branch(String)
 */
-String /* revisionId */ merge(String branchRevisionId, String message)
-        throws MicroKernelException;
+MicroKernel.prototype.merge = function(branchRevisionId, message) {};
 
 /**
 * Rebases the specified <i>private</i> branch revision on top of specified new base
@@ -531,9 +517,7 @@ String /* revisionId */ merge(String branchRevisionId, String message)
 * if it's not a branch revision, if {@code newBaseRevisionId}
 * doesn't exist, if it's a branch revision, or if another error occurs.
 */
-@Nonnull
-String /*revisionId */ rebase(@Nonnull String branchRevisionId, String newBaseRevisionId)
-    throws MicroKernelException;
+MicroKernel.prototype.rebase = function(branchRevisionId, newBaseRevisionId){};
 
 //--------------------------------------------------< BLOB READ/WRITE ops >
 
@@ -544,7 +528,7 @@ String /*revisionId */ rebase(@Nonnull String branchRevisionId, String newBaseRe
 * @return length of the specified blob
 * @throws MicroKernelException if the specified blob does not exist or if another error occurs
 */
-long getLength(String blobId) throws MicroKernelException;
+MicroKernel.prototype.getLength = function(blobId) {};
 
 /**
 * Reads up to {@code length} bytes of data from the specified blob into
@@ -563,8 +547,7 @@ long getLength(String blobId) throws MicroKernelException;
 * the blob content has been reached.
 * @throws MicroKernelException if the specified blob does not exist or if another error occurs
 */
-int /* count */ read(String blobId, long pos, byte[] buff, int off, int length)
-        throws MicroKernelException;
+MicroKernel.prototype.read = function(blobId, pos, buff, off, length) {};
 
 /**
 * Stores the content of the given stream and returns an associated
@@ -579,8 +562,7 @@ int /* count */ read(String blobId, long pos, byte[] buff, int off, int length)
 * @return blob identifier associated with the given content
 * @throws MicroKernelException if an error occurs
 */
-MicroKernel.prototype.write(inputStream) = function () {
-};
+MicroKernel.prototype.write = function(inputStream){};
 
 exports.MicroKernelException = function (message) {
 	this.message = message;
