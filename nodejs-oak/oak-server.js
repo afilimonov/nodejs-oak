@@ -6,7 +6,9 @@ var options = {
 	port : 1337
 };
 
-http.createServer(mk.getListener()).listen(
+var api = mk.getAPI();
+
+http.createServer(mk.getListener(api)).listen(
 		1337,
 		'localhost',
 		function() {

@@ -51,7 +51,7 @@
 var core = require('./core');
 
 exports.MicroKernel = MicroKernel = function () {
-	var repo = new core.Repository('.');
+	this.repo = core.getRepository();
 }; 
 
 //---------------------------------------------------------< REVISION ops >

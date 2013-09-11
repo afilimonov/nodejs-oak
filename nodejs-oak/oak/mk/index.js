@@ -10,6 +10,6 @@ exports.getAPI = function() {
 	return new api.MicroKernel();
 };
 
-exports.getListener = function() {
+exports.getListener = function(api) {
 	return servlet.listener;
 };
