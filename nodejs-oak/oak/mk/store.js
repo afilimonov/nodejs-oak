@@ -14,7 +14,7 @@ RevisionStore = function(pm) {
 	this.pm = pm;
 };
 
-RevisionStore.prototype.initialize = function() {};
+RevisionStore.prototype.getHeadCommitId = function() {};
 
 BlobStore = function(pm) {
 	this.pm = pm;
