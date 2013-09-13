@@ -13,7 +13,7 @@ exports.convertBytesToHex = function(value) {
     for (var i = 0; i < value.length; i++) {
         var str = value[i].toString(16);
 
-        z = 8 - str.length + 1;
+        z = 2- str.length + 1;
         str = Array(z).join("0") + str;
 
         result += str;
@@ -30,10 +30,10 @@ exports.convertBytesToHex = function(value) {
 */
 exports.convertHexToBytes = function(string) {
 	var result = [];
-    while (string.length >= 8) { 
-        result.push(parseInt(string.substring(0, 8), 16));
+    while (string.length > 0) { 
+        result.push(parseInt(string.substring(0, 2), 16));
 
-        string = string.substring(8, string.length);
+        string = string.substring(2, string.length);
     }
 
     return result;
@@ -47,18 +47,20 @@ exports.StringBuilder = StringBuilder = function(value) {
 };
 
 //Appends the given value to the end of this instance.
-StringBuilder.prototype.append = function (value) {
- if (value) {
-     this.strings.push(value);
- }
-};
+StringBuilder.prototype.append = {
+	append: function (value) {
+		if (value) {
+			this.strings.push(value);
+		}
+	},
 
 //Clears the string buffer
-StringBuilder.prototype.clear = function () {
- this.strings.length = 1;
-};
+	StringBuilder: function () {
+		this.strings.length = 1;
+	},
 
 //Converts this instance to a String.
-StringBuilder.prototype.toString = function () {
- return this.strings.join("");
+	toString: function () {
+		return this.strings.join("");
+	}
 };

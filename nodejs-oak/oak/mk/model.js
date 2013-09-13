@@ -14,6 +14,7 @@ var string = require('./string'), collections = require('./collections');
  */
 exports.Id = Id = function(raw) {
 	// the raw bytes making up this identifier
+	if (raw == null) throw 'Invalid argument';
 	this.raw = raw;
 };
 
@@ -274,7 +275,7 @@ exports.ChildNodeEntriesMap = ChildNodeEntriesMap = function(nodesMap) {
 	nodesMap.clone(this.entries);
 };
 
-ChildNodEntriesMap.prototype = {
+ChildNodeEntriesMap.prototype = {
 
 	equals : function(obj) {
 		if (obj instanceof ChildNodeEntriesMap) {
