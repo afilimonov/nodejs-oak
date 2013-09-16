@@ -18,6 +18,10 @@ exports.Id = Id = function(raw) {
 	this.raw = raw;
 };
 
+Id.idFromString = function(id) {
+	return new Id(string.convertHexToBytes(id));
+};
+
 Id.prototype = {
 	equals : function(obj) {
 		if (obj instanceof Id)
