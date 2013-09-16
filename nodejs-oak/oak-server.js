@@ -1,5 +1,6 @@
 var http = require('http'),
-    mk = require('./oak/mk');
+    mk = require('./oak/mk'),
+    map = require('collections/map');
 
 var options = {
 	host : 'localhost',

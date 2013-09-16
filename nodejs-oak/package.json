@@ -2,7 +2,7 @@
   "name": "nodejs-oak",
   "version": "0.1.0",
   "description": "nodejs-oak",
-  "main": "aok-server.js",
+  "main": "oak-server.js",
   "scripts": {
     "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
   },
@@ -12,6 +12,9 @@
     "Eclipse",
     "Nodeclipse"
   ],
+  "dependencies" : {
+	  "collections": "*"
+  },
   "author": "Andrei Filimonov",
   "license": "GPL 2.0",
   "readmeFilename": "README.md"
