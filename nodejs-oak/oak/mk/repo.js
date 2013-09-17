@@ -9,46 +9,32 @@ var fs = require('fs'),
 
 exports.Repository = Repository = function(home) {
 	this.homeDir = home;	
-	this.initialized = false;
-	this.pm = null;
-	this.rs = null;
-	this.bs = null;
-	
 	this.pm = persistence.createPersistenceManager();
 	this.pm.initialize(this.homeDir);
-	this.rs = store.createRevisionStore(this.pm);
-	this.bs = store.createBlobStore(this.pm);
-	
-	intialized = true;
-
+	this.rs = new store.RevisionStore(this.pm);
+	this.bs = new store.BlobStore(this.pm);
 };
 
 Repository.prototype.shutDown = function() {
-	if (!initialized) return;
 	io.close(this.rs);
 	io.close(this.bs);
 };
 
 Repository.prototype.getRevisionStore = function() {
-	if (!initialised) throw 'IllegalState: not initialized';
 	return this.rs;
 };
 
 Repository.prototype.getBlobStore = function() {
-    if (!initialized) throw new 'IllegalState: not initialized';
-
     return this.bs;
 };
 
-Repository.prototype.getHeadRevision = function() {
-    if (!initialized) throw 'IllegalState: not initialized';
-    return rs.getHeadCommitId();
+Repository.prototype.getHeadRevisionId = function() {
+    return this.rs.getHeadCommitId();
 };
 
 Repository.prototype.getBaseRevision = function (branchRevision) {
-    if (!initialized) throw 'IllegalState: not initialized';
     
-    var commit = rs.getCommit(branchRevision);
+    var commit = this.rs.getCommit(branchRevision);
     return commit == null ? null : commit.getBranchRootId();
 };
 

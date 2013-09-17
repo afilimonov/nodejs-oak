@@ -51,8 +51,8 @@
 var repo = require('./repo'),
     fs = require('fs');
 
-exports.MicroKernel = MicroKernel = function () {
-	this.repo = new repo.Repository(null);
+exports.MicroKernel = MicroKernel = function (home) {
+	this.repo = new repo.Repository(home);
 }; 
 
 //---------------------------------------------------------< REVISION ops >
@@ -64,7 +64,9 @@ exports.MicroKernel = MicroKernel = function () {
 * @return the id of the head revision
 * @throws MicroKernelException if an error occurs
 */
-MicroKernel.prototype.getHeadRevision = function() {};
+MicroKernel.prototype.getHeadRevision = function() {
+	return this.repo.getHeadRevisionId().toString();
+};
 
 /**
 * Creates a new checkpoint of the latest head revision. The checkpoint

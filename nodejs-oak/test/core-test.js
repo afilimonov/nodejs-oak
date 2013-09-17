@@ -4,10 +4,11 @@
 
 var api = require('../oak/mk/api');
 
-exports.testCommit = function(test) {
-	var mk = new api.MicroKernel();
+exports.testHeadRevision = function(test) {
+	var mk = new api.MicroKernel('./mk');
 
-	test.expect(0);
+	test.expect(1);
+	test.equals(mk.getHeadRevision(), '01', 'mk.getHeadRevision()');
 
 	test.done();
 };
