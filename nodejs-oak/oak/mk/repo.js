@@ -7,19 +7,7 @@ var fs = require('fs'),
     persistence = require('./persistence'),
     io = require('./io');
 
-var configuration = {
-	home: '.'
-};
-
-exports.getRepository = function() {
-	if (this.repo == null) {
-		this.repo = new Repository(configuration.home);
-	}
-	
-	return this.repo;
-};
-	
-Repository = function(home) {
+exports.Repository = Repository = function(home) {
 	this.homeDir = home;	
 	this.initialized = false;
 	this.pm = null;

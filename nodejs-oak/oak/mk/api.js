@@ -48,10 +48,11 @@
 * </ul>
 */
 
-var core = require('./core');
+var repo = require('./repo'),
+    fs = require('fs');
 
 exports.MicroKernel = MicroKernel = function () {
-	this.repo = core.getRepository();
+	this.repo = new repo.Repository(null);
 }; 
 
 //---------------------------------------------------------< REVISION ops >
