@@ -9,8 +9,7 @@ var fs = require('fs'),
 
 exports.Repository = Repository = function(home) {
 	this.homeDir = home;	
-	this.pm = persistence.createPersistenceManager();
-	this.pm.initialize(this.homeDir);
+	this.pm = new persistence.InMemPersistence(this.homeDir);
 	this.rs = new store.RevisionStore(this.pm);
 	this.bs = new store.BlobStore(this.pm);
 };
