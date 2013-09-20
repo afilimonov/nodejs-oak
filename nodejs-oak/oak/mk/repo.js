@@ -8,8 +8,7 @@ var fs = require('fs'),
     io = require('./io');
 
 exports.Repository = Repository = function(home) {
-	this.homeDir = home;	
-	this.pm = new persistence.InMemPersistence(this.homeDir);
+	this.pm = persistence(home);
 	this.rs = new store.RevisionStore(this.pm);
 	this.bs = new store.BlobStore(this.pm);
 };

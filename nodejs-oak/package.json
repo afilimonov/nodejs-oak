@@ -13,7 +13,9 @@
     "Nodeclipse"
   ],
   "dependencies" : {
-	  "collections": "*"
+	  "collections": "*",
+      "memdown": "*",
+      "levelup": "*"
   },
   "author": "Andrei Filimonov",
   "license": "GPL 2.0",

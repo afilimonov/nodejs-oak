@@ -5,8 +5,10 @@ var id = require('./model/id');
 
 exports.RevisionStore = RevisionStore = function(pm) {
 	//@id
-	this.head = new id.Id.idFromString('01');
 	this.pm = pm;
+    this.head; 
+    pm.readId(function(headId, commitId){
+    });
 };
 
 RevisionStore.NOT_ACTIVE = 0;
