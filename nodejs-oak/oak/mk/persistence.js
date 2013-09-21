@@ -3,16 +3,25 @@
  */
 
 var MemDOWN = require('memdown'),
-    levelup = require('levelup');
+    levelup = require('levelup'),
+    EventEmitter   = require('events').EventEmitter,
+    inherits       = require('util').inherits,
 
-var createPM = function(home) {
+createPM = function(home) {
 
-    Persistence = function(home) {
-        this.db = levelup(home, { db: function(location) { return new MemDOWN(location)} })
-    };
+    var persistence;
     
-    Persistence.HEAD = 'mk~rs~head';
-    Persistence.REVS = 'mk~rs-revs';
+    function Persistence() {
+        // Setup emitter stuff
+        EventEmitter.call(this);
+        //this.setMaxListeners(Infinity);
+    };
+
+    inherits(Persistence, EventEmitter);
+ 
+    // Defined namespaces
+    Persistence.HEAD = 'rs:head';
+    Persistence.REVS = 'rs:revs';
     
     Persistence.prototype = {
         /**
@@ -28,17 +37,6 @@ var createPM = function(home) {
          *             if an error occurs
          */
         readIds : function(callback) {
-            this.db.put(Persistence.HEAD, '1');
-            this.db.get(Persistence.HEAD, function(err, value) {
-                console.log(err);
-                console.log(value);
-                if (err) {
-                    if (err.notFound) {return;}
-                    else { throw err; }
-                } else {
-                    callback(value, value);
-                }
-            });
         },
     
         /*
@@ -169,10 +167,36 @@ var createPM = function(home) {
          *             if an error occurs
          */
         sweep : function() {
+        },
+        
+        /**
+        * Validate the repository for. Check if required data nodes exist.
+        * @emit 'empty' on pristine repository
+        * @emit 'ready' if valid and initialized repository object {rs:{head:value}}
+        */
+        validate: function() {
+            this.db.get(Persistence.HEAD, function(err, value) {
+                if (err) {
+                    if (err.notFound) {
+                        persistence.emit('empty');
+                        return;
+                    }
+                    else { throw err; }
+                } else {
+                    emit('ready', {head:value})
+                }
+            });
         }
     };
     
-    return new Persistence(home);
+    persistence = new Persistence();
+    persistence.db = levelup(home, { db: function(location) { return new MemDOWN(location)} })
+        .on('ready', persistence.validate);
+    
+    console.log(persistence instanceof EventEmitter); // true
+    console.log(persistence.super_ === EventEmitter); // true
+
+    return persistence;
 
 };
 
